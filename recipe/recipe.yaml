@@ -2,19 +2,19 @@
 schema_version: 1
 
 context:
-  version: "1.26.2"
+  version: "1.27.2"
   nodejs_min: "24.14"
 
 package:
   name: podman-desktop
-  version:  ${{ version }}
+  version: ${{ version }}
 
 source:
   url: https://github.com/podman-desktop/podman-desktop/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 86f6fa53241449bc4798d20ef28269170c188d8c686c11cbf758b677b85cc8a5
+  sha256: 1725b6aa7969c14823b51f667ab679b152ef335276a2d21ba6de442993c132ed
 
 build:
-  number: 1
+  number: 0
   # Support Linux, Windows, and macOS on x64 and arm64
   skip:
     - not (linux or win or osx)
