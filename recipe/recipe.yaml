@@ -14,7 +14,7 @@ source:
   sha256: 1725b6aa7969c14823b51f667ab679b152ef335276a2d21ba6de442993c132ed
 
 build:
-  number: 0
+  number: 1
   # Support Linux, Windows, and macOS on x64 and arm64
   skip:
     - not (linux or win or osx)
