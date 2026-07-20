@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   version: "1.28.3"
-  nodejs_min: "26"
+  nodejs_min: "24"
 
 package:
   name: podman-desktop
@@ -28,8 +28,9 @@ requirements:
   build:
     # Node.js build environment
     - nodejs ${{ nodejs_min }}.*
-    # pnpm package manager (used by Podman Desktop)
-    - pnpm
+    # pnpm package manager, pinned to match upstream's packageManager field
+    # (pnpm 11 may not accept the lockfileVersion 9.0 pnpm-lock.yaml)
+    - pnpm ==10.28.0
     # Python for node-gyp (required for native module compilation)
     - python 3.12.*
     # Compilers and standard library (all platforms)
@@ -58,7 +59,8 @@ requirements:
         - libsecret                   # Keychain integration
 
   run:
-    - nodejs ${{ nodejs_min }}.*
+    # No nodejs at runtime: Electron bundles its own Node runtime and the
+    # launcher scripts exec the Electron binary directly.
     # Kubernetes tools for container orchestration (Linux/macOS only)
     - if: unix
       then:
