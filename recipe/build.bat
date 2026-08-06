@@ -10,6 +10,15 @@ echo PWD: %CD%
 node --version
 if errorlevel 1 exit /b 1
 
+:: pnpm >=10 honours package.json's `packageManager` field by default and will
+:: download the pinned pnpm release before running any command. Build sandboxes
+:: have no network, so that turns into a hang/failure on the very first pnpm
+:: call. Use the pnpm from the build environment instead (the recipe pins it to
+:: the same version upstream requests).
+set npm_config_manage_package_manager_versions=false
+set COREPACK_ENABLE_AUTO_PIN=0
+set COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+
 :: Verify pnpm is available (provided as a build dependency via conda-forge)
 call pnpm --version
 if errorlevel 1 exit /b 1
