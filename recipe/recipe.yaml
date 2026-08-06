@@ -4,6 +4,9 @@ schema_version: 1
 context:
   version: "1.29.0"
   nodejs_min: "24"
+  # Must match the `packageManager` field in upstream's package.json, otherwise
+  # pnpm tries to self-download the pinned version (no network in the build).
+  pnpm_version: "11.15.1"
 
 package:
   name: podman-desktop
@@ -29,8 +32,7 @@ requirements:
     # Node.js build environment
     - nodejs ${{ nodejs_min }}.*
     # pnpm package manager, pinned to match upstream's packageManager field
-    # (pnpm 11 may not accept the lockfileVersion 9.0 pnpm-lock.yaml)
-    - pnpm ==10.28.0
+    - pnpm ==${{ pnpm_version }}
     # Python for node-gyp (required for native module compilation)
     - python 3.12.*
     # Compilers and standard library (all platforms)
