@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "1.29.3"
+  version: "1.30.0"
   nodejs_min: "24"
   # Must match the `packageManager` field in upstream's package.json, otherwise
   # pnpm tries to self-download the pinned version (no network in the build).
@@ -14,7 +14,7 @@ package:
 
 source:
   url: https://github.com/podman-desktop/podman-desktop/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 5b9c2dd323b0c217f1ddc37f8791b693bffd32469e95aacf24e2a068fad23095
+  sha256: da2afd187763b15df057e21a78cfe84481cab47694f6f46df59d9cd44b3c7e1a
 
 build:
   number: 0
