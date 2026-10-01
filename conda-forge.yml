@@ -7,3 +7,13 @@ conda_build:
 conda_forge_output_validation: true
 provider:
   osx_arm64: azure
+bot:
+  # Upstream may tag commits without cutting a GitHub Release. The default source
+  # set reads releases.atom, which lists bare tags, so the bot may propose tags that
+  # were never released. githubreleases follows /releases/latest, which GitHub only
+  # serves for a published, non-draft, non-prerelease Release.
+  version_updates:
+    sources:
+      - githubreleases
+    allowed_tag_globs:
+      - "v[0-9]*.[0-9]*.[0-9]*"
